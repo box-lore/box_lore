@@ -20,7 +20,7 @@ const data = [
     { name: 'Pistons', wins: 44, losses: 17, pct: .721, gb: '-',conf: '27-12',home: '24-7',away: '20-10',l10: '8-2',strk: 'W3'},
 ]
 class StandingsTable extends Component {
-//K was here
+
     render() {
         return (
             <div className="StandingsTable">
