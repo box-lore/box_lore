@@ -1,6 +1,10 @@
 const mysql = require('mysql')
 const express = require ('express')
 const bodyParser = require('body-parser')
+const fs = require('fs')
+
+const dotenv = require("dotenv")
+dotenv.config()
 
 const app = express()
 const port = process.env.PORT || 3001;
@@ -22,11 +26,14 @@ app.listen(3001, () => {
 
 var axios = require('axios');
 
+const DYL_API = `${process.env.REACT_APP_DYL_API_KEY}`;
+console.log(process.env.REACT_APP_DYL_API_KEY);
+
 var config = {
   method: 'get',
   url: 'https://v1.basketball.api-sports.io/seasons',
   headers: {
-    'x-rapidapi-key': 'e818b2873f73f8796601575c1afa2ae1',
+    'x-rapidapi-key': DYL_API,
     'x-rapidapi-host': 'v1.basketball.api-sports.io'
   }
 };
@@ -34,6 +41,12 @@ var config = {
 axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
+  var json = JSON.stringify(response.data);
+  fs.writeFile('../client/jsons/test.json', json, 'utf8', (err) => {
+    // In case of a error throw err.
+    if (err) throw err;
+});
+
 })
 .catch(function (error) {
   console.log(error);
