@@ -1,2 +1,2 @@
 #API keys
-.env
+server/.env
