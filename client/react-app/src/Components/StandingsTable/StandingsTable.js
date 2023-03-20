@@ -59,3 +59,4 @@ class StandingsTable extends Component {
     }
 }
     export default StandingsTable;
+    
