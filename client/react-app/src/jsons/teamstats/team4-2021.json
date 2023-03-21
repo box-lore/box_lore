@@ -1,0 +1,39 @@
+{
+    "get": "teams/statistics",
+    "parameters": {
+        "id": "4",
+        "season": "2021"
+    },
+    "errors": [],
+    "results": 1,
+    "response": [
+        {
+            "games": 92,
+            "fastBreakPoints": 1261,
+            "pointsInPaint": 4148,
+            "biggestLead": 1204,
+            "secondChancePoints": 1251,
+            "pointsOffTurnovers": 1470,
+            "longestRun": 1033,
+            "points": 10334,
+            "fgm": 3833,
+            "fga": 8062,
+            "fgp": "47.7",
+            "ftm": 1608,
+            "fta": 2017,
+            "ftp": "79.8",
+            "tpm": 1060,
+            "tpa": 2908,
+            "tpp": "36.4",
+            "offReb": 935,
+            "defReb": 3095,
+            "totReb": 4030,
+            "assists": 2299,
+            "pFouls": 1892,
+            "steals": 671,
+            "turnovers": 1249,
+            "blocks": 511,
+            "plusMinus": 64
+        }
+    ]
+}

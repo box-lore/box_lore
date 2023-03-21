@@ -7,7 +7,7 @@ export const MenuData = [
     },
     {
         title: "Team Dashboards ",
-        url: "#",
+        url: "teamdashpage",
         cName: "nav-links",
         icon: "fa-solid fa-basketball-ball ",
     },

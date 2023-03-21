@@ -2,9 +2,7 @@ import './AboutPage.css';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom/client';
 
-import SideBar from '../Components/Sidebar/Sidebar.js';
-import About from '../Components/About/About.js'
-import Navbar from "../Components/Navbar/NavBar.js";
+import About from '../Components/About/About.js';
 
 function AboutPage() {
     return (
