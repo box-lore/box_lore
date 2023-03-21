@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "devstart": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "getstandings" : "node scripts/apis/WestStandings.js",
+    "getteamstats" : "node scripts/apis/TeamStats.js"
   },
   "author": "",
   "license": "ISC",

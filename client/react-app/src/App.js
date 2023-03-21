@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 
 import AboutPage from './Pages/AboutPage.js';
 import HomePage from './Pages/HomePage.js';
+import TeamDashPage from './Pages/TeamDashPage';
 import Layout from './Pages/Layout.js';
 
 import {
@@ -24,6 +25,7 @@ function App() {
               <Route index element={<HomePage />} />
               <Route path="aboutpage" element={<AboutPage />} />
               <Route path="homepage" element={<HomePage />} />
+              <Route path="teamdashpage" element={<TeamDashPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
