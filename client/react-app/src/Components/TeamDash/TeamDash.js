@@ -2,103 +2,71 @@ import React, { Component } from 'react';
 import { useTable } from 'react-table';
 import './TeamDash.css'
 
-const team1json = require('../../jsons/teamstats/team1-2021.json'); // ATL
-const team2json = require('../../jsons/teamstats/team2-2021.json'); // BOS
-const team4json = require('../../jsons/teamstats/team4-2021.json');
-const team5json = require('../../jsons/teamstats/team5-2021.json');
-const team6json = require('../../jsons/teamstats/team6-2021.json');
+const allteams = ["Atlanta Hawks","Boston Celtics","Brooklyn Nets","Charlotte Hornets","Chicago Bulls","Cleveland Cavaliers",
+    "Dallas Mavericks","Denver Nuggets","Detroit Pistons","Golden State Warriors","Houston Rockets","Indiana Pacers","Los Angeles Clippers",
+    "Los Angeles Lakers","Memphis Grizzlies","Miami Heat","Milwaukee Bucks","Minnesota Timberwolves","New Orleans Pelicans","New York Knicks",
+    "Oklahoma City Thunder","Orlando Magic","Philadelphia 76ers","Phoenix Suns","Portland Trail Blazers","Sacramento Kings","San Antonio Spurs",
+    "Toronto Raptors","Utah Jazz","Washington Wizards"]
 
-const team1data = team1json.response;
-const team2data = team2json.response;
-const team4data = team4json.response;
-const team5data = team5json.response;
-const team6data = team6json.response;
+const getData = {
+    getStat(team, stat, season){
+        const teamjson = require('../../jsons/teamstats/teamstats' + season + '.json');
+        return teamjson.stats[team]['Per Game'][stat];
+    },
+    getTeamStats(team, season){
+        return(
+            <tr className="Values">
+                <td></td>
+                <td>{getData.getStat(team, 'Team', season)}</td>
+                <td>{getData.getStat(team, 'FG%', season)}</td>
+                <td>{getData.getStat(team, '2P%', season)}</td>
+                <td>{getData.getStat(team, '3P%', season)}</td>
+                <td>{getData.getStat(team, 'FT%', season)}</td>
+                <td>{getData.getStat(team, 'ORB', season)}</td>
+                <td>{getData.getStat(team, 'DRB', season)}</td>
+                <td>{getData.getStat(team, 'TRB', season)}</td>
+                <td>{getData.getStat(team, 'AST', season)}</td>
+                <td>{getData.getStat(team, 'TOV', season)}</td>
+                <td>{getData.getStat(team, 'STL', season)}</td>
+                <td>{getData.getStat(team, 'BLK', season)}</td>
+            </tr>
+        )
+    },
+    getTeamsStatsTable(teams, season){
+        return(
+            <table>
+                <tr className="Headers">
+                    <th></th>
+                    <th>Team</th>
+                    <th>FG%</th>
+                    <th>2P%</th>
+                    <th>3P%</th>
+                    <th>FT%</th>
+                    <th>ORB</th>
+                    <th>DRB</th>
+                    <th>TRB</th>
+                    <th>AST</th>
+                    <th>TOV</th>
+                    <th>STL</th>
+                    <th>BLK</th>
+                </tr>
+                <tbody>
+                    {allteams.map((val, key) => {
+                        return (
+                            getData.getTeamStats(val, season)
+                        )
+                    })}
+                </tbody>
+            </table>
+        )
+    }
+};
 
 class TeamDash extends Component{
     render(){
         return(
             <div className='TeamDashboard'>
-                <table>
-                    <tr className="Headers">
-                        <th>Team</th>
-                        <th>FG %</th>
-                        <th>3pt %</th>
-                        <th>FT %</th>
-                        <th>Steals</th>
-                        <th>Blocks</th>
-                        <th>Turnovers</th>
-                    </tr>
-
-                    {team1data.map((val, key) => {
-                        return (
-                            <tr className="Values" key={key}>
-                                <td>ATL</td>
-                                <td>{val.fgp}</td>
-                                <td>{val.tpp}</td>
-                                <td>{val.ftp}</td>
-                                <td>{val.steals}</td>
-                                <td>{val.blocks}</td>
-                                <td>{val.turnovers}</td>
-                            </tr>
-                        )
-                    })}
-
-                    {team2data.map((val, key) => {
-                        return (
-                            <tr className="Values" key={key}>
-                                <td>BOS</td>
-                                <td>{val.fgp}</td>
-                                <td>{val.tpp}</td>
-                                <td>{val.ftp}</td>
-                                <td>{val.steals}</td>
-                                <td>{val.blocks}</td>
-                                <td>{val.turnovers}</td>
-                            </tr>
-                        )
-                    })}
-
-                    {team4data.map((val, key) => {
-                        return (
-                            <tr className="Values" key={key}>
-                                <td>NYN</td>
-                                <td>{val.fgp}</td>
-                                <td>{val.tpp}</td>
-                                <td>{val.ftp}</td>
-                                <td>{val.steals}</td>
-                                <td>{val.blocks}</td>
-                                <td>{val.turnovers}</td>
-                            </tr>
-                        )
-                    })}
-
-                    {team5data.map((val, key) => {
-                        return (
-                            <tr className="Values" key={key}>
-                                <td>CHL</td>
-                                <td>{val.fgp}</td>
-                                <td>{val.tpp}</td>
-                                <td>{val.ftp}</td>
-                                <td>{val.steals}</td>
-                                <td>{val.blocks}</td>
-                                <td>{val.turnovers}</td>
-                            </tr>
-                        )
-                    })}
-
-                    {team6data.map((val, key) => {
-                        return (
-                            <tr className="Values" key={key}>
-                                <td>CHI</td>
-                                <td>{val.fgp}</td>
-                                <td>{val.tpp}</td>
-                                <td>{val.ftp}</td>
-                                <td>{val.steals}</td>
-                                <td>{val.blocks}</td>
-                                <td>{val.turnovers}</td>
-                            </tr>
-                        )
-                    })}
-                </table>
+                {getData.getTeamsStatsTable(allteams, '2022')}
             </div>
         );
     }
