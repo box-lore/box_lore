@@ -8,7 +8,7 @@
     "devstart": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "getstandings" : "node scripts/apis/WestStandings.js",
-    "getteamstats" : "node scripts/apis/TeamStats.js"
+    "getteamstats" : "node scripts/apis/TeamStatsSeason.js"
   },
   "author": "",
   "license": "ISC",
