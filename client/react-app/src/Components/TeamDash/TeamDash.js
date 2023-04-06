@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect} from 'react';
 //import { useTable } from 'react-table';
 import './TeamDash.css'
 
@@ -81,17 +81,25 @@ const getData = {
 class TeamDash extends Component {
     constructor(props){
         super(props);
-        this.state = {stateSeason : allSeasons[0],
+        this.state = {stateSeason : currentSeason,
                       stateTeams : currentTeams}
         this.changeSeason = this.changeSeason.bind(this)
     }
     changeSeason(newSeason) {
-        this.setState(prevState => ({
+        currentSeason = newSeason;
+        this.promisedSetState(prevState => ({
             stateSeason : newSeason,
-            stateTeams : prevState.getStateTeams()
+            stateTeams : prevState.state.stateTeams
+        },() => {
+            if(prevState.getStateSeason() !== this.getStateSeason()){
+                window.location.reload(false);
+                this.forceUpdate();
+                console.log(this.getStateSeason())
+            }
         }));
-        currentSeason = allSeasons[allSeasons.find(newSeason)];
+        this.render();
     }
+    promisedSetState = (newState) => new Promise(resolve => this.setState(newState, resolve));
     getStateSeason(){
         return (this.state.stateSeason);
     }
@@ -164,7 +172,7 @@ class TeamDash extends Component {
             <div>
                 <label>
                     Select Season to view:  
-                    <select id = 'seasonDrop 'classname = 'seasonDrop' onClick={e=>{this.changeSeason(e.select.value)}}>
+                    <select id = 'seasonDrop' classname = 'seasonDrop' value = {this.getStateSeason} onClick={e=>{this.changeSeason(e.select.value)}}>
                         {allSeasons.map((val) => {
                             return(
                                 <option value = {val}>{val}</option>
