@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 
 import StandingsTable from '../Components/StandingsTable/StandingsTable.js';
 import UpcomingGames from '../Components/UpcomingGames/UpcomingGames.js';
+import News from '../Components/News/News.js';
 
 function HomePage() {
     return (
@@ -11,8 +12,10 @@ function HomePage() {
       <div className="StandingsTable">
         <StandingsTable />
         <p/>
+        <News />
         <UpcomingGames />
       </div>
+      
     </div>
     );
 }
