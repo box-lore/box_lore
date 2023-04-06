@@ -78,8 +78,13 @@ const getData = {
     }
 };
 
-const seasonDrop = {
-    getSeasonDrop(){        
+class TeamDash extends Component {
+    constructor(props){
+        super(props);
+        this.state = {stateSeason : currentSeason,
+                      stateTeams : currentTeams}
+    }
+    seasonDrop(){       
         return(
             <div>
                 <label>
@@ -94,19 +99,12 @@ const seasonDrop = {
                 </label>
             </div>
         )
-    },
-}
-
-class TeamDash extends Component {
-    constructor(props){
-        super(props);
-        this.state = {season : currentSeason}
     }
     render(){
         return(
             <div>
                 <div className='TeamDash'>
-                    {seasonDrop.getSeasonDrop()}
+                    {this.seasonDrop()}
                     </div>
                 <div className='TeamDashTable'>
                     {getData.getTeamsStatsTable(allTeams, currentSeason)}
