@@ -7,7 +7,7 @@
     "start": "node index.js",
     "devstart": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "getstandings" : "node scripts/apis/WestStandings.js",
+    "getstandings" : "node scripts/apis/Standings.js",
     "getteamstats" : "node scripts/apis/TeamStatsSeason.js"
   },
   "author": "",
