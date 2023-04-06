@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { useTable } from 'react-table';
+//import { useTable } from 'react-table';
 import './TeamDash.css'
 
 const allTeams = ["Atlanta Hawks","Boston Celtics","Brooklyn Nets","Charlotte Hornets","Chicago Bulls","Cleveland Cavaliers",
@@ -10,7 +10,7 @@ const allTeams = ["Atlanta Hawks","Boston Celtics","Brooklyn Nets","Charlotte Ho
 
 var currentTeams = [...allTeams]
 
-const allSeasons = ['2022', '2021', '2020', '2019']
+const allSeasons = ['2022', '2021', '2020']
 
 var currentSeason = allSeasons[0]
 
@@ -22,7 +22,7 @@ const getData = {
     getTeamStats(team, season){
         const teamjson = require('../../jsons/teamstats/teamstats' + season + '.json');
         return(
-            <tr className="Values">
+            <tr className="TeamDashValues">
                 <td></td>
                 <td>{getData.getStat(team, 'Team', season)}</td>
                 <td>{teamjson.stats[team]['Advanced']['W']}</td>
@@ -46,7 +46,7 @@ const getData = {
     getTeamsStatsTable(teams, season){
         return(
             <table>
-                <tr className="Headers">
+                <tr className="TeamDashHeaders">
                     <th></th>
                     <th>Team</th>
                     <th>W</th>
@@ -81,15 +81,90 @@ const getData = {
 class TeamDash extends Component {
     constructor(props){
         super(props);
-        this.state = {stateSeason : currentSeason,
+        this.state = {stateSeason : allSeasons[0],
                       stateTeams : currentTeams}
+        this.changeSeason = this.changeSeason.bind(this)
     }
-    seasonDrop(){       
+    changeSeason(newSeason) {
+        this.setState(prevState => ({
+            stateSeason : newSeason,
+            stateTeams : prevState.getStateTeams()
+        }));
+        currentSeason = allSeasons[allSeasons.find(newSeason)];
+    }
+    getStateSeason(){
+        return (this.state.stateSeason);
+    }
+    getStateTeams(){
+        return (this.state.stateTeams);
+    }
+    getStat(team, stat, season){
+        const teamjson = require('../../jsons/teamstats/teamstats' + season + '.json');
+        return teamjson.stats[team]['Per Game'][stat];
+    }
+    getTeamStats(team, season){
+        const teamjson = require('../../jsons/teamstats/teamstats' + season + '.json');
+        return(
+            <tr className="TeamDashValues">
+                <td></td>
+                <td>{getData.getStat(team, 'Team', season)}</td>
+                <td>{teamjson.stats[team]['Advanced']['W']}</td>
+                <td>{teamjson.stats[team]['Advanced']['L']}</td>
+                <td>{teamjson.stats[team]['Advanced']['ORtg']}</td>
+                <td>{teamjson.stats[team]['Advanced']['DRtg']}</td>
+                <td>{getData.getStat(team, 'FG%', season)}</td>
+                <td>{getData.getStat(team, '2P%', season)}</td>
+                <td>{getData.getStat(team, '3P%', season)}</td>
+                <td>{getData.getStat(team, 'FT%', season)}</td>
+                <td>{getData.getStat(team, 'ORB', season)}</td>
+                <td>{getData.getStat(team, 'DRB', season)}</td>
+                <td>{getData.getStat(team, 'TRB', season)}</td>
+                <td>{getData.getStat(team, 'AST', season)}</td>
+                <td>{getData.getStat(team, 'TOV', season)}</td>
+                <td>{getData.getStat(team, 'STL', season)}</td>
+                <td>{getData.getStat(team, 'BLK', season)}</td>
+            </tr>
+        )
+    }
+    getTeamsStatsTable(teams, season){
+        return(
+            <table>
+                <tr className="TeamDashHeaders">
+                    <th></th>
+                    <th>Team</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>ORT</th>
+                    <th>DRT</th>
+                    <th>FG%</th>
+                    <th>2P%</th>
+                    <th>3P%</th>
+                    <th>FT%</th>
+                    <th>ORB</th>
+                    <th>DRB</th>
+                    <th>TRB</th>
+                    <th>AST</th>
+                    <th>TOV</th>
+                    <th>STL</th>
+                    <th>BLK</th>
+                    <th></th>
+                </tr>
+                <tbody>
+                    {this.state.stateTeams.map((val) => {
+                        return (
+                            getData.getTeamStats(val, this.getStateSeason())
+                        )
+                    })}
+                </tbody>
+            </table>
+        )
+    }
+    seasonDrop(){
         return(
             <div>
                 <label>
                     Select Season to view:  
-                    <select id = 'seasonDrop 'classname = 'seasonDrop' value = {currentSeason}>
+                    <select id = 'seasonDrop 'classname = 'seasonDrop' onClick={e=>{this.changeSeason(e.select.value)}}>
                         {allSeasons.map((val) => {
                             return(
                                 <option value = {val}>{val}</option>
@@ -107,7 +182,7 @@ class TeamDash extends Component {
                     {this.seasonDrop()}
                     </div>
                 <div className='TeamDashTable'>
-                    {getData.getTeamsStatsTable(allTeams, currentSeason)}
+                    {this.getTeamsStatsTable(this.state.stateTeams, this.state.stateSeason)}
                 </div>
             </div>
         );
