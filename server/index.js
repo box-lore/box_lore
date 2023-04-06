@@ -1,14 +1,11 @@
-// Import requirements for Express server
 const mysql = require('mysql')
 const express = require ('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
 
-// Import dotenv package for .env usage
 const dotenv = require("dotenv")
 dotenv.config()
 
-// Initialize Express server
 const app = express()
 const port = process.env.PORT || 3001;
 
@@ -27,32 +24,35 @@ app.listen(3001, () => {
     console.log("Server running on port 3001");
 })
 
-// Import Axios for API calls
 var axios = require('axios');
 
-// Import API keys from .env file
-const BBALL_API = `${process.env.BBALL_API_KEY}`;
-console.log(process.env.BBALL_API_KEY);
+const TYL_API = `${process.env.TYL_API_KEY}`;
+console.log(process.env.TYL_API_KEY);
 
-//League 12 is NBA
-//Must include season=XXXX-XXXX in standings call
-// var config = {
-//   method: 'get',
-//   url: "https://v1.basketball.api-sports.io/seasons",
-//   headers: {
-//     'x-rapidapi-host': 'v1.basketball.api-sports.io',
-//     'x-rapidapi-key': BBALL_API
-//   }
-// };
 
-// axios(config)
-// .then(function (response) {
-//   console.log(JSON.stringify(response.data));
-//   var json = JSON.stringify(response.data);
-//   fs.writeFile('../client/react-app/src/jsons/seasons.json', json, 'utf8', (err) => {
-//     // In case of a error throw err.
-//     if (err) throw err;
-// });
+var config = {
+    method: 'get',
+  url: 'https://nba-latest-news.p.rapidapi.com/articles',
+  params: {team: 'lakers'},
+  headers: {
+    'X-RapidAPI-Key': TYL_API,
+    'X-RapidAPI-Host': 'nba-latest-news.p.rapidapi.com'
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+  var json = JSON.stringify(response.data);
+  fs.writeFile('../client/react-app/src/jsons/test.json', json, 'utf8', (err) => {
+    // In case of a error throw err.
+    if (err) throw err;
+});
+
+})
+.catch(function (error) {
+  console.log(error);
+});
 
 // })
 // .catch(function (error) {
