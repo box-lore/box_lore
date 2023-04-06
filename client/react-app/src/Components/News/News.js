@@ -19,8 +19,8 @@ class News extends Component {
                     {json.map((article, key) => {
                         return (
                             <tr className="Values" key={key}>
-                                <td>{article.title}</td>
-                                <td><a href={article.url}> {article.url} </a> </td>
+                              
+                                <td><a href={article.url}> {article.title} </a> </td>
                                 <td>{article.source}</td>
                             </tr>
                         )
