@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import AboutPage from './Pages/AboutPage.js';
 import HomePage from './Pages/HomePage.js';
 import TeamDashPage from './Pages/TeamDashPage';
-import SignupPage from './Components/SignupPage/SignupPage';
+import SignupPage from './Pages/SignupPage/SignupPage';
 import Layout from './Pages/Layout.js';
 
 import {
