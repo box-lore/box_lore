@@ -1,6 +1,5 @@
 const fs = require('fs');
 const dotenv = require("dotenv");
-const mongoose = require('mongoose');
 const axios = require('axios');
 
 dotenv.config();
@@ -20,28 +19,28 @@ const importData = async () => {
   }
 }
 
-// const options = {
-//     method: 'GET',
-//     url: 'https://api-nba-v1.p.rapidapi.com/teams/statistics',
-//     params: {id: '6', season: '2021'},
-//     headers: {
-//       'X-RapidAPI-Key': BBALL_API,
-//       'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
-//     }
-// };
+const options = {
+    method: 'GET',
+    url: 'https://api-nba-v1.p.rapidapi.com/teams/statistics',
+    params: {id: '1', season: '2021'},
+    headers: {
+      'X-RapidAPI-Key': BBALL_API,
+      'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
+    }
+};
   
-// axios.request(options).then(function (response) {
-//       const postData = {
-//         title: "test",
-//         content: JSON.stringify(response.data),
-//       }
-//       axios.post('http://localhost:3001/create', postData)
-//   }).catch(function (error) {
-//       console.error(error);
-// });
+axios.request(options).then(function (response) {
+      const postData = {
+        title: "test",
+        content: response.data.response,
+      }
+      axios.post('http://localhost:3001/create', postData)
+  }).catch(function (error) {
+      console.error(error);
+});
 
-const postData = {
-  title: "test",
-  content: "testerino"
-}
-axios.post('http://localhost:3001/create', postData)
+// const postData = {
+//   title: "test",
+//   content: "testerino"
+// }
+// axios.post('http://localhost:3001/create', postData)
