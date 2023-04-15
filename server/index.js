@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/", require("./routes/jsonRoute.js"));
 
-const mongoURI = `${process.env.DB_CONNECT}`;
+const mongoURI = `${process.env.DB_CONNECT_TEAMSTATS}`;
 mongoose.connect(mongoURI);
 
 const boxDB = mysql.createPool({
