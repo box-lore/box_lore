@@ -14,6 +14,9 @@ app.use(cors());
 app.use(express.json());
 app.use("/", require("./routes/jsonRoute.js"));
 
+// mongoose.connect('mongodb+srv://dyldrm:Peppercat1!@clusterm0.qhxluea.mongodb.net/box-lore')
+// app.use("/user", require("./routes/userRoute"));
+
 const mongoURI = `${process.env.DB_CONNECT_TEAMSTATS}`;
 mongoose.connect(mongoURI);
 

@@ -1,12 +1,13 @@
 import React, { Component, useState, useHistory } from 'react';
 import './FormStyle.css';
-import SignupInputs from './SignupInputs';
-import SignupHeading from './SignupHeading';
+import LoginInputs from './LoginInputs';
+import LoginHeading from './LoginHeading';
 import axios from 'axios';
 
-const SignupPage = () => {
+const LoginPage = () => {
   const [values, setValues] = useState({
     username:"",
+    // email:"",
     age:"",
     password:"",
     securityquestion:""
@@ -23,6 +24,16 @@ const SignupPage = () => {
       errorMessage: "Username should be 3-14 characters and include at least 1 letter and 1 number",
       required: true,
     },
+    // {
+    //   id: 2,
+    //   name: "email",
+    //   type: "text",
+    //   placeholder: "Email",
+    //   label: "Email",
+    //   pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$",
+    //   errorMessage: "Should be a valid email",
+    //   required: true
+    // },
     {
       id: 2,
       name: "age",
@@ -43,6 +54,16 @@ const SignupPage = () => {
       errorMessage: "Password should have at least 5 characters and should include at least both lowercase and uppercase letter, 1 number, and 1 special character",
       required: true
     },
+    // {
+    //   id: 5,
+    //   name: "confirm password",
+    //   type: "text",
+    //   placeholder: "Confirm Password",
+    //   label: "password",
+    //   pattern: values.password,
+    //   errorMessage: "Password don't match",
+    //   required: true
+    // },
     {
       id: 4,
       name: "security question",
@@ -63,37 +84,32 @@ const SignupPage = () => {
 
   console.log(values);
 
-   
-  const handleSubmit = async (e) => {
+  
+  const handleSubmit = (e) => {
     e.preventDefault();  
     
     const newUser = {
       username: values.username,
+      // email: values.email,
       age: values.age,
       password: values.password,
       securityquestion: values.securityquestion
     };
-    // try {
-    //   const response = await axios.post('http://localhost:3001/user', newUser);
-    //   console.log(response);
-    // } catch(error){
-    //   console.log(error);
-    // }
-    await axios.post('http://localhost:3001/user', newUser)
-    
+
+    axios.post('http://localhost:3000/create', newUser)
   };
 
   return (
     <div className='main'>
       <div className='formHeading'>
-        <SignupHeading />
+        <LoginHeading />
         <hr />
       </div>
       
       <div className='formInputs'>
         <form onSubmit={handleSubmit}>
           {inputs.map((input) => (
-            <SignupInputs 
+            <LoginInputs 
               key={input.id} 
               {...input} 
               value={values[input.name]}
@@ -108,4 +124,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default LoginPage;
