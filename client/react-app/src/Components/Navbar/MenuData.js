@@ -6,6 +6,12 @@ export const MenuData = [
         icon:"fa-solid fa-house-user "
     },
     {
+        title: " Guide",
+        url: "guidepage",
+        cName:"nav-links",
+        icon:"fa-solid fa-house-alt "
+    },
+    {
         title: " About Us",
         url: "aboutpage",
         cName:"nav-links",
