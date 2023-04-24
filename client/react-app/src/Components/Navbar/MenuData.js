@@ -12,6 +12,12 @@ export const MenuData = [
         icon:"fa-solid fa-circle-info "
     },
     {
+        title: " Register",
+        url: "signuppage",
+        cName:"nav-links",
+        icon:"fa-solid fa-user-alt  "
+    },
+    {
         title: " Profile",
         url: "#",
         cName:"nav-links",
